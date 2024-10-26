@@ -14,10 +14,10 @@ app.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/hello/:name/:secondName', (req, res)=> {
-    const name = req.params.name;
-    const secondName = req.params.secondName;
-    res.send(`Hello ${name} ${secondName}`);
+app.get('/hello/:firstname/:lastname', (req, res)=> {
+    const firstname = req.params.firstname;
+    const lastname = req.params.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
 });
 
 //catches any errors within the server
@@ -28,4 +28,11 @@ app.use((err,req,res, next)=>{
 
 app.listen(port, ()=>{
     console.log(`server is running on http://localhost:${port}`);
+});
+
+//calls get method on the form "name"
+app.get('/name', (req, res) => {
+    const firstname = req.query.firstname;
+    const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
 });
