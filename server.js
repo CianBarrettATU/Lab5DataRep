@@ -2,6 +2,8 @@ const express = require('express');
 const app =  express();
 const port = 3000;
 const path = require('path');
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
@@ -34,5 +36,11 @@ app.listen(port, ()=>{
 app.get('/name', (req, res) => {
     const firstname = req.query.firstname;
     const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
+});
+
+app.post('/name', (req, res) => {
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
     res.send(`Hello ${firstname} ${lastname}`);
 });
