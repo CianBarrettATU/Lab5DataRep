@@ -2,8 +2,17 @@ const express = require('express');
 const app =  express();
 const port = 3000;
 
-app.get('/', (req, res)=> {
-    res.send('Hello world');
+//created url which takes parameters and displays names
+app.get('/hello/:name/:secondName', (req, res)=> {
+    const name = req.params.name;
+    const secondName = req.params.secondName;
+    res.send(`Hello ${name} ${secondName}`);
+});
+
+//catches any errors within the server
+app.use((err,req,res, next)=>{
+    console.error(err.stack);
+    res.status(500).send('something went wrong');
 });
 
 app.listen(port, ()=>{
